@@ -487,3 +487,10 @@ cython_debug/
 # Android studio 3.1+ serialized cache file
 
 /.qodo/
+/.idea/.gitignore
+/.idea/atlas.iml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/vcs.xml
