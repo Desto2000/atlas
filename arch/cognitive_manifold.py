@@ -38,7 +38,7 @@ class LearnableMetricTensor(nn.Module):
         batch_size = x.shape[0]
 
         # Generate metric parameters
-        metric_params = self.metric_network(x.mean(dim=-1))  # [B, D²]
+        metric_params = self.metric_network(x.mean(dim=1))  # [B, D²]
         metric_matrix = metric_params.view(batch_size, self.manifold_dim, self.manifold_dim)
 
         # Ensure positive definiteness: G = L @ L^T + εI

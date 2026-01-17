@@ -267,9 +267,8 @@ class ThoughtNativeActivationGenerator(nn.Module):
         # Select composition operation
         comp_op = self.composition_ops[composition_type % self.num_composition_ops]
 
-        # Apply composition: result = thought1 @ comp_op @ thought2
-        intermediate = torch.matmul(thought1.unsqueeze(-2), comp_op.unsqueeze(0))
-        composed = torch.matmul(intermediate, thought2.unsqueeze(-1)).squeeze(-1)
+        # Apply composition: result = (thought1 + thought2) @ comp_op
+        composed = torch.matmul(thought1 + thought2, comp_op)
 
         return composed
 
@@ -463,6 +462,9 @@ class ContextCognitionSynthesis(nn.Module):
         """Measure the coherence of thought activations."""
         # Compute pairwise similarities
         batch_size, seq_len, dim = thoughts.shape
+
+        if seq_len <= 1:
+            return torch.ones(batch_size, device=thoughts.device)
 
         # Normalize thoughts
         norm_thoughts = F.normalize(thoughts, dim=-1)

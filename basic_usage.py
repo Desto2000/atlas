@@ -20,7 +20,7 @@ logging.basicConfig(level=logging.INFO)
 
 def setup_device_and_model():
     """Setup device and create ATLAS model with proper device handling."""
-    device_manager = DeviceManager('cpu')  # Auto-detect CUDA or CPU
+    device_manager = DeviceManager()  # Auto-detect CUDA or CPU
     print(f"Using device: {device_manager.device}")
 
     # Create ATLAS instance with proper device
